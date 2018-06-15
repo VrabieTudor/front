@@ -1,0 +1,170 @@
+div.loading-div(ng-if="!$flightCtrl.pageLoaded")
+    loading-data.center(message='Loading')
+div(ng-if="$flightCtrl.pageLoaded")
+    section#section-city-guides.probootstrap_section
+        .container
+            .row
+                .col-md-12
+                        form.probootstrap-form(action='#')
+                            .form-group
+                                .row
+                                    .col-md
+                                        .form-group
+                                            label(for='id_label_single') From
+                                            .probootstrap_select-wrap
+                                                label(for='id_label_single', style='width: 100%;')
+                                                    input#id_label_single.form-control(type='text', name='category', placeholder='Search...', ng-model='$flightCtrl.model.from', uib-typeahead='obj.city + ", " + obj.code for obj in getCdOnCat($viewValue)', typeahead-loading='loadingLocations', required='true' typeahead-wait-ms="100")
+
+                                    .col-md
+                                        .form-group
+                                            label(for='id_label_single2') To
+                                            .probootstrap_select-wrap
+                                                label(for='id_label_single2', style='width: 100%;')
+                                                    input#id_label_single2.form-control(type='text', typeahead-wait-ms="100" name='category', placeholder='Search...', ng-model='$flightCtrl.model.to', uib-typeahead='obj.city + ", " + obj.code for obj in getCdOnCat($viewValue)', typeahead-loading='loadingLocations', required='true')
+                                // END row
+                                .row
+                                    .col-md
+                                        .form-group
+                                            label(for='probootstrap-date-departure') Departure
+                                            .probootstrap-date-wrap
+                                                span.icon.ion-calendar
+                                                input#probootstrap-date-departure.form-control(type='date', placeholder='Select' ng-model='$flightCtrl.model.fromDate' required='true')
+                                    .col-md(ng-if="$flightCtrl.model.typeFlight === 'round'")
+                                        .form-group
+                                            label(for='probootstrap-date-arrival') Arrival
+                                            .probootstrap-date-wrap
+                                                span.icon.ion-calendar
+                                                input#probootstrap-date-arrival.form-control(type='date', placeholder='' ng-model='$flightCtrl.model.toDate' required='true')
+                                .row
+                                    .col-md
+                                        .form-group
+                                            label(for='adults') Adults
+                                            .probootstrap-date-wrap
+                                                span.icon.ion-calendar
+                                                input#adults.form-control(type='number', placeholder='Adults' ng-model='$flightCtrl.model.adults' required='true' min='1')
+                                .row
+                                    .col-md
+                                        .form-group
+                                            label(for='children') Children
+                                            .probootstrap-date-wrap
+                                                span.icon.ion-calendar
+                                                input#children.form-control(type='number', placeholder='Children' ng-model='$flightCtrl.model.children' required='true' min='0')
+                                .row
+                                    .col-md
+                                        .form-group
+                                            label Sort by
+                                            .probootstrap_select-wrap
+                                                select.js-example-basic-single.js-states.form-control(placeholder="Sort by" ng-model='$flightCtrl.model.sortBy')
+                                                    option(value='asc') Price asc
+                                                    option(value='desc') Price desc
+                                .row
+                                    .col-md
+                                        .form-group
+                                            label Flight duration
+                                            .probootstrap_select-wrap
+                                                rzslider.custom-slider(rz-slider-model="duration" rz-slider-options="flightOptions")
+                                .row
+                                    .col-md
+                                        .form-group
+                                            label Max price
+                                            .probootstrap_select-wrap
+                                                rzslider.custom-slider(rz-slider-model="price" rz-slider-options="priceOptions")
+                                .row
+                                    .col-md
+                                        .form-group
+                                            label.m-t-10.mr-5(for='direct')
+                                                input#direct(type='radio', name='ftype', value='direct' ng-model='$flightCtrl.model.connection')
+                                                |   Direct
+                                            label.mr-5(for='1connection')
+                                                input#1connection(type='radio', name='ftype', value='onlyOne' ng-model='$flightCtrl.model.connection')
+                                                |   1 Connection
+                                            label.mr-5(for='unlimited')
+                                                input#unlimited(type='radio', name='ftype', value='unlimited' ng-model='$flightCtrl.model.connection')
+                                                |   Unlimited
+                                .row
+                                    .col-md
+                                        .form-group
+                                            label.mr-5(for='round')
+                                                input#round(type='radio', name='direction' ng-model='$flightCtrl.model.typeFlight' value = 'round')
+                                                |   round
+                                            label(for='oneway')
+                                                input#oneway(type='radio', name='direction', value = 'oneway' ng-model='$flightCtrl.model.typeFlight')
+                                                |   Oneway
+                                .row
+                                    .col-md
+                                        .form-group
+                                            button.btn.btn-primary.btn-block(type="button" ng-click='$flightCtrl.submitSearch()') Submit
+            .row
+                .col-md-12.box-container(ng-repeat="route in $flightCtrl.model.flights" ng-style="{'min-height': $flightCtrl.height + 'px'}")
+                    .box(ng-repeat="flight in route.routes")
+                        ul.left
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                        ul.right
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                            li
+                        .ticket
+                            img.airline.airline-img(src="http://pics.avs.io/100/100/{{flight.airline.iata}}.png")
+                            .content
+                                span.jfk {{flight.cityFrom}}
+                                    span.plane
+                                        svg(clip-rule='evenodd', fill-rule='evenodd', height='30', width='30', image-rendering='optimizeQuality', shape-rendering='geometricPrecision', text-rendering='geometricPrecision', viewbox='0 0 500 500', xmlns='http://www.w3.org/2000/svg')
+                                            g(stroke='#222')
+                                                line(fill='none', stroke-linecap='round', stroke-width='30', x1='300', x2='55', y1='390', y2='390')
+                                                path(d='M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z', fill='#222', stroke-linejoin='round', stroke-width='10')
+                                    span.sfo {{flight.cityTo}}
+                                .sub-content
+                                    span.name
+                                        | Departure
+                                        br
+                                        span {{flight.departure_date}}
+                                    span.flight
+                                        | Arrival
+                                        br
+                                        span {{flight.arrival_date}}
+                                    span.boardingtime
+                                        | Duration
+                                        br
+                                        span {{flight.fly_duration}}
+                                    span.flight.flightslip
+                                        | From Airport
+                                        br
+                                        span {{flight.from_airport.code}}
+                                    span.seat.seatslip
+                                        |
+                                        br
+                                        span
+                                    span.name.nameslip
+                                        | To Airport
+                                        br
+                                        span {{flight.to_airport.code}}
+                            .barcode
+                            .barcode.slip
+                    .box-price
+                        p Price: {{route.price.EUR}} €
+                        p Duration: {{route.fly_duration}}
+                        button.btn.btn-primary.btn-block.btn-sm(ng-click="$flightCtrl.buy(route.link)") Buy

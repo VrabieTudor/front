@@ -1,0 +1,27 @@
+// All Bootstrap
+
+$blue: #006BA6;
+@import "~bootstrap/scss/bootstrap";
+
+// Helpers
+@import "helpers/all";
+
+// Base
+@import "base/all";
+
+// Components
+@import "components/all";
+
+// Layout
+@import "layout/all";
+
+// Vendors
+@import "vendors/all";
+
+// Pages
+@import "pages/all";
+
+//Tema
+@import "tema/icon-fonts";
+@import "tema/style";
+@import "tema/helpers";
