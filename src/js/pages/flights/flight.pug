@@ -2,7 +2,7 @@ div.loading-div(ng-if="!$flightCtrl.pageLoaded")
     loading-data.center(message='Loading')
 div(ng-if="$flightCtrl.pageLoaded")
     section#section-city-guides.probootstrap_section
-        .container
+        .container.ticket-container
             .row
                 .col-md-12
                         form.probootstrap-form(action='#')
@@ -94,9 +94,61 @@ div(ng-if="$flightCtrl.pageLoaded")
                                     .col-md
                                         .form-group
                                             button.btn.btn-primary.btn-block(type="button" ng-click='$flightCtrl.submitSearch()') Submit
-            .row
-                .col-md-12.box-container(ng-repeat="route in $flightCtrl.model.flights" ng-style="{'min-height': $flightCtrl.height + 'px'}")
+            .row.route(ng-repeat="route in $flightCtrl.response.flights")
+                main(ng-repeat="flight in route.routes")
+                    header
+                        h1 Boarding pass
+                        div
+                            h5 Flight n°
+                            p  {{flight.flight_no}}
+                    section.flight--general
+                        div
+                            h4 {{flight.cityFrom}}
+                            h2(ng-click="$flightCtrl.popover(flight.from_airport.latitude, flight.from_airport.longitude)" popover-trigger="'click'" popover-class="test" uib-popover="{{$flightCtrl.places[0].name}}") {{flight.flyFrom}}
+                        div
+                            h4 to
+                        div
+                            h4 {{flight.cityTo}}
+                            h2() {{flight.flyTo}}
+                    section.flight--TimeInfo
+                        div
+                            h5 Boarding
+                            p {{flight.departure_date}}
+                        div
+                            h5 Arrival
+                            p {{flight.arrival_date}}
+                        div
+                            h5 Duration
+                            p {{flight.fly_duration}} h
+                    section.flight--PassInfo
+                        div
+                            h5 Airline
+                            p {{flight.airline.name}}
+                        div
+                            h5 Date
+                            p {{flight.flight_date}}
+                    section.flight--qrcode
+                        img(src="http://pics.avs.io/500/500/{{flight.airline.iata}}.png" width="150" height="150")
+                    section.extra--meteo(ng-if="$index === (route.routes.length - 1)")
+                        div
+                            h5 Duration
+                            h6 {{route.fly_duration}}
+                        div
+                            h5 Price
+                            h6 {{route.price.EUR}} €
+                        div
+                            h5 Action
+                            button.btn.btn-primary.btn-xs(type="button") Buy
+
+                    //p(ng-if="flight.from_airport.code === $flightCtrl.shut.to" style="border-bottom: 3px solid red") FUCK OFF
+
+                    //section.extra--image
+                    //    img(src='https://images.unsplash.com/photo-1464790719320-516ecd75af6c?dpr=2&auto=format&fit=crop&w=1500&h=1001&q=80&cs=tinysrgb&crop=')
+
+            //.row
+                .col-md-12.box-container(ng-repeat="route in $flightCtrl.response.flights" ng-style="{'min-height': $flightCtrl.height + 'px'}")
                     .box(ng-repeat="flight in route.routes")
+                        p(ng-if="flight.from_airport.code === $flightCtrl.shut.to") salut
                         ul.left
                             li
                             li

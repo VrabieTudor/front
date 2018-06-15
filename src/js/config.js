@@ -1,5 +1,5 @@
 const Config = {
-  apiEndpoint: 'http://localhost:8000/api',
+  apiEndpoint: 'http://192.168.0.142:8000/api',
 };
 
 export default Config;
