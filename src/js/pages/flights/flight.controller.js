@@ -1,18 +1,21 @@
 import Config from '../../config';
 
 class FlightCtrl {
-    constructor(Search, Place, City, $timeout, $state, moment, $scope, $stateParams) {
+    constructor(Search, Place, City, $timeout, $state, moment, $scope, $stateParams, $uibModal) {
         this.Search = Search;
         this.City = City;
         this.Place = Place;
         this.pageLoaded = false;
+        this.modalLoaded = true;
         this.$scope = $scope;
+        this.$uibModal = $uibModal;
         this.$stateParams = $stateParams;
         this.$scope.duration = 200;
         this.$scope.price = 5000;
         this.$state = $state;
+        this.$timeout = $timeout;
 
-        this.popover = (lat, lng, keyword = "coffee") => {
+        this.popover = (lat, lng, keyword = "hotel") => {
             const param = {
                 lat,
                 lng,
@@ -20,9 +23,15 @@ class FlightCtrl {
             };
             this.Place.list(param).$promise.then(res => {
                 this.places = res.data;
+                this.modalLoaded = true;
             });
         };
-
+        this.openPlacesModal = (lat, lng) => {
+            this.lat = lat;
+            this.lng = lng;
+            this.modalLoaded = false;
+            this.popover(lat, lng);
+        };
         this.model = {
             sortBy: 'asc'
         };
@@ -32,14 +41,6 @@ class FlightCtrl {
         a.map(item => {
            this.shut[item] = this.$stateParams[item];
         });
-
-        // this.model.fromDate = this.$stateParams.fromDate;
-        // this.model.to = this.$stateParams.to;
-        // this.model.toDate = this.$stateParams["toDate"];
-        // this.model.from = this.$stateParams.from;
-        // this.model.typeFlight = this.$stateParams.typeFlight;
-        // this.model.adults = this.$stateParams.adults;
-        // this.model.children = this.$stateParams.children;
 
         this.$scope.flightOptions = {
             onChange: (sliderId, modelValue, highValue, pointerType) => {
@@ -56,7 +57,7 @@ class FlightCtrl {
     submitSearch(model) {
         this.Search.search(model).$promise.then(res => {
             this.response = res.data;
-            console.log(this.response, this.model);
+            console.log(this.response);
             if(this.response.flights.length === 0) {
                 this.$state.go('404');
             }
@@ -70,6 +71,10 @@ class FlightCtrl {
             link,
             '_blank'
         );
+    }
+    searchModal() {
+        this.modalLoaded = false;
+        this.popover(this.lat, this.lng, this.searchModalValue);
     }
 }
 
