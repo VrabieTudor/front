@@ -14,7 +14,6 @@ class FlightCtrl {
         this.$scope.price = 5000;
         this.$state = $state;
         this.$timeout = $timeout;
-
         this.popover = (lat, lng, keyword = "hotel") => {
             const param = {
                 lat,
@@ -26,30 +25,31 @@ class FlightCtrl {
                 this.modalLoaded = true;
             });
         };
-        this.openPlacesModal = (lat, lng) => {
+        this.openPlacesModal = (lat, lng, airportCode) => {
+            this.airport = airportCode;
             this.lat = lat;
             this.lng = lng;
             this.modalLoaded = false;
             this.popover(lat, lng);
         };
-        this.model = {
-            sortBy: 'asc'
-        };
-
         this.shut = {};
-        const a = Object.keys(this.$stateParams).splice(1);
-        a.map(item => {
-           this.shut[item] = this.$stateParams[item];
-        });
+
+        this.shut.adults = parseInt(this.$stateParams.adults);
+        this.shut.children = parseInt(this.$stateParams.children);
+        this.shut.from = this.$stateParams.from;
+        this.shut.to = this.$stateParams.to;
+        this.shut.sortBy = 'asc';
+        this.shut.fromDate = moment(this.$stateParams.fromDate).format();
+        this.shut.toDate = moment(this.$stateParams.toDate).format();
 
         this.$scope.flightOptions = {
             onChange: (sliderId, modelValue, highValue, pointerType) => {
-                this.model.flightDuration = modelValue;
+                this.shut.flightDuration = modelValue;
             }
         };
         this.$scope.priceOptions = {
             onChange: (sliderId, modelValue, highValue, pointerType) => {
-                this.model.maxPrice = modelValue;
+                this.shut.maxPrice = modelValue;
             }
         };
         this.submitSearch(this.shut);
@@ -57,7 +57,6 @@ class FlightCtrl {
     submitSearch(model) {
         this.Search.search(model).$promise.then(res => {
             this.response = res.data;
-            console.log(this.response);
             if(this.response.flights.length === 0) {
                 this.$state.go('404');
             }

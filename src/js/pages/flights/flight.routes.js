@@ -1,7 +1,7 @@
 class FlightRoutes {
     constructor($stateProvider) {
         $stateProvider.state('flight', {
-            url: '/flights/:fromDate/:toDate/:from/:to/:adults/:children/:typeFlight',
+            url: '/flights/{fromDate}/{toDate}/{from}/{to}/{adults}/{children}/{typeFlight}',
             //params: {model : null},
             template: require('./flight.pug'),
             controller: 'FlightCtrl',
