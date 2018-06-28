@@ -10,7 +10,6 @@ div(ng-if="$flightCtrl.pageLoaded")
                 .card.card-body
                     .row
                         .col-md-12
-                            h2 {{$flightCtrl.shut.adults}}
                             form.probootstrap-form(action='#')
                                 .form-group
                                     .row
@@ -98,7 +97,7 @@ div(ng-if="$flightCtrl.pageLoaded")
                                     .row
                                         .col-md
                                             .form-group
-                                                button.btn.btn-block.btn-default.btn-blue(type="button" ng-click='$flightCtrl.submitSearch()') Submit
+                                                button.btn.btn-block.btn-default.btn-blue(type="button" ng-click='$flightCtrl.submitSearch($flightCtrl.shut)') Submit
             .row(ng-repeat="flight in $flightCtrl.response.flights")
                 .flight-container
                     .flight-header
@@ -127,10 +126,10 @@ div(ng-if="$flightCtrl.pageLoaded")
                             .flight-logo
                                 img(src="http://pics.avs.io/500/500/{{going.airline.iata}}.png" width="150" height="150")
                 .flight-container
-                    .flight-header
+                    .flight-header(ng-if="flight.returning.length > 0")
                         h2 {{flight.toAirport}} - {{flight.fromAirport}}
                         h2 {{flight.toCity}} - {{flight.fromCity}}
-                    .flight-route(ng-class="{'height': (153*(flight.returning.length + 1)) + 'vh;'}")
+                    .flight-route(ng-class="{'height': (153*(flight.returning.length + 1)) + 'vh;'}" )
                         .flight-route-going(ng-repeat="returning in flight.returning")
                             .airports
                                 h3(ng-click="$flightCtrl.openPlacesModal(returning.from_airport.latitude, returning.from_airport.longitude, returning.from_airport.code)" data-toggle="modal" data-target="#exampleModal") {{returning.from_airport.code}} - {{returning.to_airport.code}}

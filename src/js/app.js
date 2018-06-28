@@ -43,3 +43,6 @@ angular.module('app').config(/* @ngInject */ ($locationProvider, $urlRouterProvi
 });
 
 angular.module('app').value('AppConfig', Config);
+
+
+

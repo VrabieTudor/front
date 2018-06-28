@@ -1,0 +1,21 @@
+section.probootstrap-cover.overflow-hidden.relative.city-section
+    .container
+        input.rounded-input.probootstrap_select-wrap(type='text' ng-change="$cityCtrl.submitSearch()" ng-model="$cityCtrl.searchValue" ng-model-options="{debounce: 300}")
+div.loading-div(class="fade-out" ng-hide="$cityCtrl.pageLoaded")
+    loading-data.center(message='Loading')
+div(class="fadeIn" ng-show="$cityCtrl.pageLoaded")
+    section.probootstrap_section.city-section-container
+        .container(ng-if="$cityCtrl.cities !== null")
+            .row.mb-3
+                .col-md-6(ng-repeat="city in $cityCtrl.cities")
+                    .media.probootstrap-media.d-flex.align-items-stretch.mb-4.probootstrap-animate
+                        .probootstrap-media-image
+                            img.city-image(src="{{city.main_image}}" width="250px", height="188px")
+                        .media-body
+                            a(href="{{city.details.wiki_page_link}}" target="_blank")
+                                h5 {{city.title}}
+                            p
+                                |{{city.details.short_description}}
+        .container(ng-if="$cityCtrl.cities === null")
+            h2
+                | {{$cityCtrl.message}}

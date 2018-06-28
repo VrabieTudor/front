@@ -1174,10 +1174,12 @@ header {
 .flight-container {
   width: 100vw;
   padding: 40px 15px;
+  border-radius: 10px;
   .flight-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 10px;
     height: 5vh;
     padding: 20px;
     background: #ff4500;
@@ -1187,6 +1189,7 @@ header {
   }
   .flight-route {
     background: #fff;
+    border-radius: 10px;
     h3 {
       font-size: 1.35rem;
     }

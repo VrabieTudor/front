@@ -14,6 +14,15 @@ class FlightCtrl {
         this.$scope.price = 5000;
         this.$state = $state;
         this.$timeout = $timeout;
+        this.$scope.getCdOnCat = (searchVal) => {
+            this.cityArray = [];
+            return this.getData(searchVal).$promise.then(res => {
+                this.cityArray = res.data;
+                this.arrayBackup = angular.copy(this.cityArray);
+                return this.cityArray;
+            });
+        };
+
         this.popover = (lat, lng, keyword = "hotel") => {
             const param = {
                 lat,
@@ -32,16 +41,18 @@ class FlightCtrl {
             this.modalLoaded = false;
             this.popover(lat, lng);
         };
+        console.log(this.$stateParams);
         this.shut = {};
-
         this.shut.adults = parseInt(this.$stateParams.adults);
         this.shut.children = parseInt(this.$stateParams.children);
         this.shut.from = this.$stateParams.from;
         this.shut.to = this.$stateParams.to;
         this.shut.sortBy = 'asc';
-        this.shut.fromDate = moment(this.$stateParams.fromDate).format();
-        this.shut.toDate = moment(this.$stateParams.toDate).format();
-
+        this.shut.fromDate = this.$stateParams.fromDate ? new Date(this.$stateParams.fromDate) : undefined;
+        this.shut.toDate = this.$stateParams.toDate ? new Date(this.$stateParams.toDate) : undefined;
+        this.shut.connection = 'unlimited';
+        this.shut.typeFlight = this.$stateParams.typeFlight;
+        console.log(this.shut);
         this.$scope.flightOptions = {
             onChange: (sliderId, modelValue, highValue, pointerType) => {
                 this.shut.flightDuration = modelValue;
@@ -55,6 +66,7 @@ class FlightCtrl {
         this.submitSearch(this.shut);
     }
     submitSearch(model) {
+        this.pageLoaded = false;
         this.Search.search(model).$promise.then(res => {
             this.response = res.data;
             if(this.response.flights.length === 0) {
