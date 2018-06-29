@@ -23,3 +23,26 @@
   border-top-style: solid;
   border-top-width: 1px;
 }
+
+.probootstrap-media {
+  height: 170px;
+
+  .media-body {
+    overflow: hidden;
+    padding: 24px;
+  }
+
+  .probootstrap-media-image {
+
+    img {
+      height: 100%;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.rounded-input {
+  padding: 5px 15px;
+  width: 250px;
+}

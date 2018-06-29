@@ -17,7 +17,7 @@ class CityCtrl {
             method: 'GET',
             url: 'https://api.sandbox.amadeus.com/v1.2/points-of-interest/yapq-search-text',
             params: {
-              //  'apikey': this.apiKey,
+                'apikey': this.apiKey,
                 'city_name': this.searchValue,
                 'lang': 'EN',
                 'category': 'landmark',

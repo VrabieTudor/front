@@ -1,6 +1,6 @@
 section.probootstrap-cover.overflow-hidden.relative.city-section
     .container
-        input.rounded-input.probootstrap_select-wrap(type='text' ng-change="$cityCtrl.submitSearch()" ng-model="$cityCtrl.searchValue" ng-model-options="{debounce: 300}")
+        input.rounded-input.probootstrap_select-wrap(type='text' ng-change="$cityCtrl.submitSearch()" ng-model="$cityCtrl.searchValue" ng-model-options="{debounce: 300}" placeholder="Search...")
 div.loading-div(class="fade-out" ng-hide="$cityCtrl.pageLoaded")
     loading-data.center(message='Loading')
 div(class="fadeIn" ng-show="$cityCtrl.pageLoaded")
