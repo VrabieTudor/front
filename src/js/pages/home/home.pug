@@ -1,5 +1,5 @@
 div.loading-div(class="fade-out" ng-hide="$homeCtrl.pageLoaded")
-    loading-data.center(message='Loading')
+    loading-data.div-bottom.center(message='Loading')
 div(class="fadeIn" ng-show="$homeCtrl.pageLoaded")
     section#section-home.probootstrap-cover.overflow-hidden.relative(style="background-image: url('/images/bg_1.jpg');", data-stellar-background-ratio='0.5')
         .overlay
@@ -31,13 +31,13 @@ div(class="fadeIn" ng-show="$homeCtrl.pageLoaded")
                                         label(for='probootstrap-date-departure') Departure
                                         .probootstrap-date-wrap
                                             span.icon.ion-calendar
-                                            input#probootstrap-date-departure.form-control(type='date', placeholder='Select' ng-model='$homeCtrl.model.fromDate' required='true')
+                                            input#probootstrap-date-departure.form-control.form-date(type='date', placeholder='Select' ng-model='$homeCtrl.model.fromDate' required='true')
                                 .col-md(ng-if="$homeCtrl.model.typeFlight === 'round'")
                                     .form-group
                                         label(for='probootstrap-date-arrival') Arrival
                                         .probootstrap-date-wrap
                                             span.icon.ion-calendar
-                                            input#probootstrap-date-arrival.form-control(type='date', placeholder='' ng-model='$homeCtrl.model.toDate' required='true')
+                                            input#probootstrap-date-arrival.form-control.form-date(type='date', placeholder='' ng-model='$homeCtrl.model.toDate' required='true')
                             .row
                                 .col-md
                                     .form-group
@@ -72,33 +72,33 @@ div(class="fadeIn" ng-show="$homeCtrl.pageLoaded")
                     blockquote
                         p.lead.mb-4
                             em
-                                | Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
+                                | You might feel like you’re stuck in a rut in your daily life. Or you’re yearning for something exciting and different. You’re craving new experiences and new challenges. Travel is the ideal place to test yourself. It pushes people to their limits and gets them outside their comfort zone.
                         p.probootstrap-author
-                            a(href='https://probootstrap.com/', target='_blank')
-                                img.rounded-circle(ng-src='/images/person_1.jpg', alt='Free Template by ProBootstrap.com')
-                                span.probootstrap-name James Smith
+                            a
+                                //img.rounded-circle(ng-src='/images/ceo.png', alt='ceo photo')
+                                span.probootstrap-name Vrabie Tudor
                                 span.probootstrap-title Chief Executive Officer
     // END section
     section#section-city-guides.probootstrap_section
         .container
             .row.text-center.mb-5.probootstrap-animate
                 .col-md-12
-                    h2.display-4.border-bottom.probootstrap-section-heading Top Places Around The World
-            .row
+                    h2.display-4.border-bottom.probootstrap-section-heading Top Places Around Europe
+            .row.centered-row
                 .col-lg-3.col-md-6.probootstrap-animate.mb-3
-                    a.probootstrap-thumbnail(href='#')
-                        img.img-fluid(ng-src='/images/img_1.jpg', alt='Free Template by ProBootstrap.com')
+                    a.probootstrap-thumbnail(href='/#/cities/Rome' target="_blank")
+                        img.img-fluid(ng-src='/images/rome.jpg')
                         .probootstrap-text
-                            h3 Buena
+                            h3 Rome
                 .col-lg-3.col-md-6.probootstrap-animate.mb-3
-                    a.probootstrap-thumbnail(href='#')
-                        img.img-fluid(ng-src='/images/img_2.jpg', alt='Free Template by ProBootstrap.com')
-                        h3 Road
+                    a.probootstrap-thumbnail(href='/#/cities/Paris' target="_blank")
+                        img.img-fluid(ng-src='/images/paris.jpg')
+                        h3 Paris
                 .col-lg-3.col-md-6.probootstrap-animate.mb-3
-                    a.probootstrap-thumbnail(href='#')
-                        img.img-fluid(ng-src='/images/img_3.jpg', alt='Free Template by ProBootstrap.com')
-                        h3 Australia
+                    a.probootstrap-thumbnail(href='/#/cities/Madrid' target="_blank")
+                        img.img-fluid(ng-src='/images/madrid.jpg')
+                        h3 Madrid
                 .col-lg-3.col-md-6.probootstrap-animate.mb-3
-                    a.probootstrap-thumbnail(href='#')
-                        img.img-fluid(ng-src='/images/img_4.jpg', alt='Free Template by ProBootstrap.com')
-                        h3 Japan
+                    a.probootstrap-thumbnail(href='/#/cities/London' target="_blank")
+                        img.img-fluid(ng-src='/images/london.jpg')
+                        h3 London

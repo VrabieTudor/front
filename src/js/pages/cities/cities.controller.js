@@ -1,12 +1,21 @@
 import Config from '../../config';
 
 class CityCtrl {
-    constructor($http) {
+    constructor($http, $stateParams) {
         this.pageLoaded = true;
         this.$http = $http;
-        //this.apiKey = 'rAUaDVZaWnhz9RQP6dZ20xMWvBIFgW08';
-        this.apiKey = 'kSKOaNrWDJQeHsGqf8EkugivKlZ5AAB3';
-        this.searchValue = 'Rome';
+        this.$stateParams = $stateParams;
+        if(this.$stateParams.cityName) {
+            this.searchValue = this.$stateParams.cityName;
+        } else {
+            this.searchValue = 'Rome';
+        }
+        //this.apiKey = 'rAUaDVZaWnhz9RQP6dZ20xMWvBIFgW08'; expirat
+        //this.apiKey = 'kSKOaNrWDJQeHsGqf8EkugivKlZ5AAB3'; expirat
+        //this.apiKey = 'Fvpd0beyaBWZBPElB9mCPau0LGRao6Ws'; expirat
+        this.apiKey = '2nMwIGAlC2A0X22rWkprzUeAYuR7bKjK';
+        //this.apiKey = '27AcAq2KTUQEjg7oeA3MxX2ACZgC6bF';
+        //this.apiKey = 'oO824Hjvlkq2cTOmIGmYoa2gYfOGuspC';
         this.cities = null;
         this.selectedCity = null;
         this.submitSearch();
@@ -29,12 +38,20 @@ class CityCtrl {
             this.pageLoaded = true;
             this.cities = response.data.points_of_interest;
             this.selectedCity = response.data.current_city.name;
-            console.log(this.cities);
-        }, () => {
+        }, (res) => {
             this.cities = null;
+            if(res.status === 500) {
+                this.submitSearch();
+            }
             this.message = "No records found";
             this.pageLoaded = true;
         });
+    }
+    openModal(city) {
+        this.main_image = city.main_image;
+        this.link = city.details.wiki_page_link;
+        this.title = city.title;
+        this.description = city.details.description;
     }
 }
 

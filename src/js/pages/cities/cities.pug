@@ -10,12 +10,33 @@ div(class="fadeIn" ng-show="$cityCtrl.pageLoaded")
                 .col-md-6(ng-repeat="city in $cityCtrl.cities")
                     .media.probootstrap-media.d-flex.align-items-stretch.mb-4.probootstrap-animate
                         .probootstrap-media-image
-                            img.city-image(src="{{city.main_image}}" width="250px", height="188px")
+                            img.city-image(src="{{city.main_image}}" width="250px", height="188px" alt="No picture")
                         .media-body
                             a(href="{{city.details.wiki_page_link}}" target="_blank")
                                 h5 {{city.title}}
                             p
-                                |{{city.details.short_description}}
+                                |{{city.details.short_description| limitTo: 60}}
+                                a.customized-a(ng-if="city.details.short_description.length > 60" ng-click="$cityCtrl.openModal(city)" data-toggle="modal" data-target="#cityModal") ...see more
         .container(ng-if="$cityCtrl.cities === null")
             h2
                 | {{$cityCtrl.message}}
+#cityModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='cityModal', aria-hidden='true')
+    .modal-dialog(role='document')
+        .modal-content
+            .modal-header
+                h5#exampleModalLabel.modal-title {{$cityCtrl.modalCityName}}
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') ×
+            .modal-body
+                .media.modal-media.d-flex.align-items-stretch.mb-4.probootstrap-animate
+                    .probootstrap-media-image.iphone-5
+                        img.city-image(src="{{$cityCtrl.main_image}}" width="250px", height="188px" alt="No picture")
+                    .media-body.modal-with-scroll
+                        a(href="{{$cityCtrl.link}}" target="_blank")
+                            h5 {{$cityCtrl.title}}
+                        p
+                            | {{$cityCtrl.description}}
+
+
+            .modal-footer
+                button.btn.btn-secondary(type='button', data-dismiss='modal') Close

@@ -1,5 +1,5 @@
 .city-section {
-  background-color: #fcedd8;
+  background-color: #f9ebd2;
   padding-bottom: 5px;
 }
 .city-section-container {
@@ -41,8 +41,34 @@
     }
   }
 }
-
+.customized-a {
+  cursor: pointer;
+  color: #848d9b !important;
+}
 .rounded-input {
   padding: 5px 15px;
   width: 250px;
+}
+.modal-media {
+  height: 300px;
+}
+.modal-with-scroll {
+  overflow: auto;
+  padding: 10px;
+}
+@media (max-width: 991.98px) {
+  .probootstrap-media {
+    height: 300px;
+  }
+  .probootstrap-media .probootstrap-media-image {
+    padding: 14px;
+  }
+  .media-body {
+    font-size: 14px;
+  }
+}
+@media(max-width: 500px) {
+  .iphone-5 {
+    display: none;
+  }
 }

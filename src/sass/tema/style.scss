@@ -196,6 +196,7 @@ a {
 	display: block;
 	transition: .3s all ease;
 	opacity: 1;
+	text-decoration: none;
 	&.sleep {
 		opacity: .5;
 	}

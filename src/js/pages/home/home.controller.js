@@ -13,11 +13,13 @@ class HomeCtrl {
         this.model = {
             typeFlight: 'round',
             children: 0,
-            adults: 1
+            adults: 1,
+            fromDate: new Date(new moment(new Date())),
+            toDate: new Date(new moment(new Date()).add(1, 'days'))
         };
         $timeout(() => {
             this.pageLoaded = true;
-        },3000);
+        },1500);
         this.$scope.getCdOnCat = (searchVal) => {
             this.cityArray = [];
             return this.getData(searchVal).$promise.then(res => {

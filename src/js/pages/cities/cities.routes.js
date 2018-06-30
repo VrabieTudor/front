@@ -1,10 +1,10 @@
 class CityRoutes {
     constructor($stateProvider) {
         $stateProvider.state('cities', {
-            url: '/cities',
+            url: '/cities/:cityName',
             template: require('./cities.pug'),
             controller: 'CityCtrl',
-            controllerAs: '$cityCtrl',
+            controllerAs: '$cityCtrl'
         });
     }
 

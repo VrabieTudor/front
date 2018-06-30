@@ -41,7 +41,6 @@ class FlightCtrl {
             this.modalLoaded = false;
             this.popover(lat, lng);
         };
-        console.log(this.$stateParams);
         this.shut = {};
         this.shut.adults = parseInt(this.$stateParams.adults);
         this.shut.children = parseInt(this.$stateParams.children);
@@ -52,7 +51,6 @@ class FlightCtrl {
         this.shut.toDate = this.$stateParams.toDate ? new Date(this.$stateParams.toDate) : undefined;
         this.shut.connection = 'unlimited';
         this.shut.typeFlight = this.$stateParams.typeFlight;
-        console.log(this.shut);
         this.$scope.flightOptions = {
             onChange: (sliderId, modelValue, highValue, pointerType) => {
                 this.shut.flightDuration = modelValue;
@@ -69,9 +67,6 @@ class FlightCtrl {
         this.pageLoaded = false;
         this.Search.search(model).$promise.then(res => {
             this.response = res.data;
-            if(this.response.flights.length === 0) {
-                this.$state.go('404');
-            }
             this.height = this.response.maxRoutes * 262;
             this.pageLoaded = true;
         });
