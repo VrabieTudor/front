@@ -42,8 +42,9 @@ class CityCtrl {
             this.cities = null;
             if(res.status === 500) {
                 this.submitSearch();
+            } else {
+                this.message = "No records found"; 
             }
-            this.message = "No records found";
             this.pageLoaded = true;
         });
     }
